@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <title>AW</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      
+      table tr td {
+       	border: 1px solid black;
+        width: 100px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+  	<div id="waiting">
+  		Waiting
+  	</div>
+  	<div id="playing">
+  	  <table id="score">
+        <tr>
+          <td class="first"></td>
+          <td class="second"></td>
+        <tr>
+      </table>
+      <button>Press me fast</button>
+  	</div>
+    
+    <script>
+    
+	  $('#waiting').show();
+	  $('#playing').hide();
+	  
+      var $score1 = $('#score .first');
+      var $score2 = $('#score .second');
+      
+      var socket = io();
+      socket.on('connect', function() {      
+        $('button').click(function(e) {
+        console.info('click');
+          socket.emit('press');
+        });
+      });
+      
+      socket.on('start game', function(){
+        console.info('start game');
+        $('#waiting').hide();
+  	    $('#playing').show();
+      });
+      
+      socket.on('score update', function(vars){
+        vars = JSON.parse(vars);
+        for (var key in vars.scores) {
+         if (vars.scores.hasOwnProperty(key)) {
+    		if (key == socket.id) {
+    		  $score1.html(vars.scores[key]);
+            }
+			else {
+              $score2.html(vars.scores[key]);
+			}
+		  }
+		}
+        var myScore = vars.scores[socket.id];
+        
+        $score2.html();
+      });
+      
+      socket.on('end game', function(){
+        $('#waiting').hide();
+		$('#playing').hide();
+      });
+      
+      socket.on('disconnect', function() {
+        $('button').off('click');
+        $('#waiting').show();
+        $('#playing').hide();
+      });
+    </script>
+  </body>
+</html>
