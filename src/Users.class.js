@@ -1,5 +1,5 @@
-var util = require("util");
-var events = require("events");
+var util = require('util');
+var events = require('events');
 
 var User = require('./User.class.js');
 

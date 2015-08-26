@@ -1,4 +1,4 @@
-var util = require("util");
+var util = require('util');
 
 var User = require('./User.class.js');
 var Users = require('./Users.class.js');

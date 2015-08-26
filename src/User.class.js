@@ -1,5 +1,7 @@
-var util = require("util");
-var events = require("events");
+var util = require('util');
+var events = require('events');
+
+var Pi = require('./Pi.class.js');
 
 function User() {
   this.socket = undefined;
@@ -25,6 +27,7 @@ User.prototype.send = function(event, vars) {
 //privates
 User.prototype.onPress = function() {
   this.score ++;
+  Pi.getInstance().press(Pi.BLUE);
   this.emit(User.SCORE_UPDATE);
 };
 
