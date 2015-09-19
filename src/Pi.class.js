@@ -27,7 +27,7 @@ Pi.prototype.init = function() {
   wpi.pinMode(Pi.PRESS_RED_PIN, wpi.OUTPUT); //pin 11
   wpi.pinMode(Pi.PRESS_START_PIN, wpi.OUTPUT); //pin 12
   
-  //wpi.pinMode(, wpi.INPUT); //pin 13
+  wpi.pinMode(Pi.BLUE_VICTORY_PIN, wpi.INPUT); //pin 13
   wpi.pinMode(Pi.RED_VICTORY_PIN, wpi.INPUT); //pin 15
 };
 
