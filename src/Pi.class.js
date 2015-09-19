@@ -2,12 +2,12 @@ var wpi = require('wiring-pi');
 
 function Pi() {}
 
-Pi.BLUE_VICTORY_PIN = 2;
-Pi.RED_VICTORY_PIN = 3;
+Pi.PRESS_BLUE_PIN = 7; //pin 7
+Pi.PRESS_RED_PIN = 0; //pin 11
+Pi.PRESS_START_PIN = 1; //pin 12
 
-Pi.PRESS_BLUE_PIN = 7;
-Pi.PRESS_RED_PIN = 0;
-Pi.PRESS_START_PIN = 1;
+Pi.BLUE_VICTORY_PIN = 2; //pin 13
+Pi.RED_VICTORY_PIN = 3; //pin 15
 
 Pi.instance = undefined;
 
@@ -23,12 +23,12 @@ Pi.prototype.init = function() {
   wpi.setup('wpi');
 	
   //three output pins
-  wpi.pinMode(Pi.PRESS_BLUE_PIN, wpi.OUTPUT); //pin 7
-  wpi.pinMode(Pi.PRESS_RED_PIN, wpi.OUTPUT); //pin 11
-  wpi.pinMode(Pi.PRESS_START_PIN, wpi.OUTPUT); //pin 12
+  wpi.pinMode(Pi.PRESS_BLUE_PIN, wpi.OUTPUT);
+  wpi.pinMode(Pi.PRESS_RED_PIN, wpi.OUTPUT);
+  wpi.pinMode(Pi.PRESS_START_PIN, wpi.OUTPUT);
   
-  wpi.pinMode(Pi.BLUE_VICTORY_PIN, wpi.INPUT); //pin 13
-  wpi.pinMode(Pi.RED_VICTORY_PIN, wpi.INPUT); //pin 15
+  wpi.pinMode(Pi.BLUE_VICTORY_PIN, wpi.INPUT);
+  wpi.pinMode(Pi.RED_VICTORY_PIN, wpi.INPUT);
 };
 
 Pi.prototype.press = function(pin) {
